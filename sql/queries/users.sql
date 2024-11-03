@@ -10,3 +10,7 @@ VALUES(
 -- name: GetUser :one 
 Select * FROM users 
 where users.name = $1;
+
+
+-- name: DeleteUsers :exec
+DELETE FROM users;

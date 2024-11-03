@@ -25,11 +25,13 @@ func main() {
 
 	db, err := sql.Open("postgres", userConfig.DbURL)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("error connecting to db: %v", err)
 	}
+	defer db.Close()
+	dbQueries := database.New(db)
 
 	programState := &state{
-		db:     database.New(db),
+		db:     dbQueries,
 		config: &userConfig,
 	}
 
@@ -38,6 +40,7 @@ func main() {
 	}
 	Commands.register("login", handlerLogin)
 	Commands.register("register", handleRegister)
+	Commands.register("reset", handlerReset)
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: cli <command> [args...]")
 		os.Exit(1)
