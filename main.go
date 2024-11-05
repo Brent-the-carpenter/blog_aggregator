@@ -39,9 +39,12 @@ func main() {
 		registeredCommands: make(map[string]func(*state, command) error),
 	}
 	Commands.register("login", handlerLogin)
-	Commands.register("register", handleRegister)
+	Commands.register("register", handlerRegister)
 	Commands.register("users", handlerGetUsers)
+	Commands.register("agg", handlerAgg)
 	Commands.register("reset", handlerReset)
+	Commands.register("addfeed", handlerAddFeed)
+	Commands.register("feeds", handlerListsFeeds)
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: cli <command> [args...]")
 		os.Exit(1)
