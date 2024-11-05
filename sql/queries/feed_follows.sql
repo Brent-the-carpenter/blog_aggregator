@@ -1,4 +1,3 @@
-
 -- name: CreateFeedFollow :one
 WITH inserted_feed_follow AS (
     INSERT INTO feed_follows(
@@ -25,3 +24,9 @@ FROM inserted_feed_follow
 JOIN users ON users.id = inserted_feed_follow.user_id 
 JOIN feeds ON inserted_feed_follow.feed_id = feeds.id
 WHERE inserted_feed_follow.id = inserted_feed_follow.id;
+
+-- name: GetFeedFollowsForUser :many
+SELECT users.name as userName , feeds.name as feedName FROM feed_follows
+JOIN users ON feed_follows.user_id = users.id 
+JOIN feeds ON feed_follows.feed_id = feeds.id
+WHERE feed_follows.user_id = (SELECT users.id FROM users WHERE users.name = $1) ;
