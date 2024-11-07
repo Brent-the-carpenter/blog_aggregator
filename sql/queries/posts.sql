@@ -21,5 +21,10 @@ INSERT INTO posts(
 RETURNING *;
 
 
--- name: GetPosts :many
-SELECT posts.* , feeds.name as feed_name FROM posts JOIN feeds ON posts.feed_id = feeds.id ORDER BY published_at DESC , feeds.name LIMIT $1;
+-- name: GetPostsForUser :many
+SELECT posts.* , feeds.name as feed_name FROM posts
+ JOIN feed_follows ON posts.feed_id = feed_follows.feed_id 
+ JOIN feeds ON posts.feed_id = feeds.id
+ WHERE feed_follows.user_id =$1
+ ORDER BY posts.published_at DESC 
+LIMIT $2;

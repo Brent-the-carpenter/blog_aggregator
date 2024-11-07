@@ -70,7 +70,7 @@ func handlerGetUsers(s *state, cmd command) error {
 	}
 
 	if len(users) == 0 {
-		return fmt.Errorf("No users in the database currently")
+		return fmt.Errorf("no users in the database currently")
 	}
 
 	for _, user := range users {

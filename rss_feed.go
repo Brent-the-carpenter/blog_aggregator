@@ -31,7 +31,7 @@ func fetchFeed(ctx context.Context, feedURL string) (*RSSFeed, error) {
 	}
 	req, err := http.NewRequestWithContext(ctx, "GET", feedURL, nil)
 	if err != nil {
-		return &RSSFeed{}, fmt.Errorf("There was a error creating the request: %w", err)
+		return &RSSFeed{}, fmt.Errorf("there was a error creating the request: %w", err)
 	}
 
 	req.Header.Set("User-Agent", "gator")
