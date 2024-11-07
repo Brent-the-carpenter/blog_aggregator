@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/Brent-the-carpenter/blog_aggregator/internal/database"
+	"github.com/Brent-the-carpenter/gator/internal/database"
 	"github.com/google/uuid"
 	"time"
 )

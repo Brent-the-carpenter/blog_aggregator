@@ -1,4 +1,4 @@
-module github.com/Brent-the-carpenter/blog_aggregator
+module github.com/Brent-the-carpenter/gator
 
 go 1.23.2
 

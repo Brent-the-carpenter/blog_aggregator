@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/Brent-the-carpenter/blog_aggregator/internal/config"
-	"github.com/Brent-the-carpenter/blog_aggregator/internal/database"
+	"github.com/Brent-the-carpenter/gator/internal/config"
+	"github.com/Brent-the-carpenter/gator/internal/database"
 	_ "github.com/lib/pq"
 )
 
@@ -48,6 +48,7 @@ func main() {
 	Commands.register("follow", middlewareLoggedIn(handlerFollow))
 	Commands.register("following", middlewareLoggedIn(handlerListFeedFollows))
 	Commands.register("unfollow", middlewareLoggedIn(handlerUnfollowFeed))
+	Commands.register("browse", handlerBrowse)
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: cli <command> [args...]")
 		os.Exit(1)
