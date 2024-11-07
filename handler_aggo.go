@@ -56,10 +56,14 @@ func scrapeFeed(db *database.Queries, feed database.Feed) {
 	}
 
 	for _, rsPost := range rssFeed.Channel.Item {
-		var pubDate time.Time
-		// Adjust the format string to match your date format
+		pubDate := sql.NullTime{}
+
 		if t, err := time.Parse(time.RFC1123Z, rsPost.PubDate); err == nil {
-			pubDate = t
+			pubDate = sql.NullTime{
+				Time:  t,
+				Valid: true,
+			}
+		} else {
 			log.Printf("couldn't parse publish date into time.Time type: %v", err)
 		}
 
