@@ -45,6 +45,7 @@ func scrapeFeeds(s *state) error {
 }
 
 func scrapeFeed(db *database.Queries, feed database.Feed) {
+	postsAdded := 0
 	feed, err := db.MarkFeedFetched(context.Background(), feed.ID)
 	if err != nil {
 		log.Printf("couldn't mark feed %s as fetched: %v", feed.Name, err)
@@ -85,6 +86,7 @@ func scrapeFeed(db *database.Queries, feed database.Feed) {
 			log.Printf("couldn't save post: %s from: %s : %v\n", rsPost.Title, rssFeed.Channel.Title, err)
 			continue
 		}
+		postsAdded += 1
 	}
-	log.Printf("Feed %s collected, %v posts found", feed.Name, len(rssFeed.Channel.Item))
+	log.Printf("Feed %s collected, %v posts found", feed.Name, postsAdded /*len(rssFeed.Channel.Item)*/)
 }

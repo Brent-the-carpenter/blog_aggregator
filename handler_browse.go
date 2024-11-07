@@ -9,14 +9,14 @@ import (
 )
 
 func handlerBrowse(s *state, cmd command, user database.User) error {
-	var limit int32
+	limit := int32(2)
 	if len(cmd.args) == 1 {
 		if fmtLimit, err := strconv.Atoi(cmd.args[0]); err == nil {
 			limit = int32(fmtLimit)
 		} else {
-			return fmt.Errorf("invalid limit: %w", err)
+
 		}
-	} else {
+	} else if len(cmd.args) > 1 {
 		return fmt.Errorf("usage: %s <optional limit>", cmd.name)
 	}
 
